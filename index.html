@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Professional 3D Configurator | HDRI + Textures</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="controls-panel">
+        <div class="control-group">
+            <label>🎨 BACKGROUND MODE</label>
+            <select id="bgModeSelect">
+                <option value="solid">Solid Color</option>
+                <option value="hdri">HDRI Environment</option>
+            </select>
+        </div>
+        
+        <div class="control-group" id="solidColorGroup">
+            <label>🎨 SOLID BACKGROUND</label>
+            <select id="bgColorSelect">
+                <option value="#0a0a2a" selected>Deep Space</option>
+                <option value="#1a1a2e">Dark Pro</option>
+                <option value="#ffffff">Pure White</option>
+                <option value="#f0f0f0">Soft Gray</option>
+                <option value="#2d5016">Forest Green</option>
+                <option value="#2c3e50">Midnight Blue</option>
+                <option value="#000000">Pure Black</option>
+            </select>
+        </div>
+        
+        <div class="control-group" id="hdriGroup" style="display: none;">
+            <label>🌍 HDRI ENVIRONMENT</label>
+            <select id="hdriSelect">
+                <option value="studio">Studio Soft</option>
+                <option value="sunset">Warm Sunset</option>
+                <option value="forest">Forest Path</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>💡 LIGHTING PRESET</label>
+            <select id="lightingSelect">
+                <option value="natural">Natural / Daylight</option>
+                <option value="studio">Studio Premium</option>
+                <option value="dramatic">Dramatic Contrast</option>
+                <option value="soft">Soft Ambient</option>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Texture Picker - Top Center -->
+    <div class="texture-picker" id="texturePicker">
+        <!-- Texture circles will be added dynamically -->
+    </div>
+    
+    <!-- Color Picker - Bottom Center -->
+    <div class="color-picker" id="colorPicker">
+        <div class="color-circle" style="background-color: #ff3366;" data-color="#ff3366"></div>
+        <div class="color-circle" style="background-color: #33ff66;" data-color="#33ff66"></div>
+        <div class="color-circle" style="background-color: #3399ff;" data-color="#3399ff"></div>
+        <div class="color-circle" style="background-color: #ffcc00;" data-color="#ffcc00"></div>
+        <div class="color-circle" style="background-color: #ff66cc;" data-color="#ff66cc"></div>
+        <div class="color-circle" style="background-color: #ffffff;" data-color="#ffffff"></div>
+        <div class="color-circle" style="background-color: #aa66ff;" data-color="#aa66ff"></div>
+    </div>
+    
+    <div class="gizmo-panel">
+        <button class="gizmo-btn" data-view="left">◀ L</button>
+        <button class="gizmo-btn" data-view="right">R ▶</button>
+        <button class="gizmo-btn" data-view="top">▲ T</button>
+        <button class="gizmo-btn" data-view="bottom">▼ B</button>
+        <button class="gizmo-btn" data-view="back">◀ Bk</button>
+        <button class="gizmo-btn" data-view="forward">Fw ▶</button>
+    </div>
+    
+    <div class="loading-overlay" id="loadingStatus">
+        📦 Loading model...
+    </div>
+    
+    <div class="info">
+        🎯 3D Configurator | Textures ▲ | Colors ▼ | Drag to rotate
+    </div>
+
+<script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module" src="./script.js">
+      
+    </script>
+</body>
+</html>

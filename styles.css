@@ -1,0 +1,460 @@
+  body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Main Control Panel - Top Right */
+        .controls-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(75, 75, 91, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 18px 22px;
+            color: white;
+            z-index: 100;
+            display: flex;
+            gap: 18px;
+            flex-direction: column;
+            min-width: 220px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            font-family: 'Segoe UI', monospace;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .control-group label {
+            font-size: 11px;
+            opacity: 0.7;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        select, button {
+            background: rgba(0,0,0,0.65);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+            padding: 9px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        
+        select:hover, button:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-1px);
+        }
+        
+        /* Texture Picker Circles - Top Center */
+        .texture-picker {
+            position: fixed;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 100;
+            background: rgba(75, 75, 91, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 12px 28px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+       .texture-circle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.2s;
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    overflow: hidden;  /*重要: 确保图片不溢出圆角边界 */
+    position: relative;
+    background-color: #333; /* fallback color */
+}
+
+.texture-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 让图片完全覆盖圆形区域，会裁剪多余部分 */
+    object-position: center center;  /* 居中显示 */
+    display: block;
+}
+
+/* Fallback for emoji/text when no image */
+.texture-circle .fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: linear-gradient(135deg, #555, #333);
+}
+        
+        .texture-circle:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .texture-circle.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px white, 0 0 0 6px rgba(255,255,255,0.3);
+        }
+        
+        /* Color Picker - Bottom Center */
+        .color-picker {
+            position: fixed;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 14px;
+            z-index: 100;
+            background: rgba(75, 75, 91, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .color-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.2s;
+            border: 2px solid rgba(255,255,255,0.9);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .color-circle:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .color-circle.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px white, 0 0 0 6px rgba(255,255,255,0.3);
+        }
+        
+        /* Gizmo Navigation - Left Side */
+        .gizmo-panel {
+            position: fixed;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            z-index: 100;
+            background: rgba(75, 75, 91, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 18px 12px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .gizmo-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.75);
+            border: 1px solid rgba(255,255,255,0.35);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: monospace;
+            font-weight: 700;
+        }
+        
+        .gizmo-btn:hover {
+            background: #ff5500;
+            transform: scale(1.08);
+            border-color: white;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #00ff88;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 100;
+            pointer-events: none;
+            letter-spacing: 1px;
+        }
+        
+        .info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(5px);
+            color: rgba(255,255,255,0.9);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-family: monospace;
+            z-index: 100;
+            pointer-events: none;
+        }
+        /* ========== MOBILE RESPONSIVE STYLES ========== */
+/* ========== BASE STYLES (Desktop First) ========== */
+.texture-picker {
+    position: fixed;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    z-index: 100;
+    background: rgba(20, 20, 30, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 12px 28px;
+    border-radius: 60px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.texture-circle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.2s;
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    overflow: hidden;
+    position: relative;
+    background-color: #2a2a2a;
+    flex-shrink: 0;
+}
+
+.texture-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    pointer-events: none;
+}
+
+/* Color Picker - Bottom Center (Desktop) */
+.color-picker {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    z-index: 100;
+    background: rgba(20, 20, 30, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 10px 24px;
+    border-radius: 60px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.color-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.2s;
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* Gizmo Panel - Left Side (Desktop) */
+.gizmo-panel {
+    position: fixed;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 100;
+    background: rgba(20, 20, 30, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 18px 12px;
+    border-radius: 60px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.gizmo-btn {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.75);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-weight: 700;
+}
+
+/* ========== MOBILE STYLES (max-width: 768px) ========== */
+@media (max-width: 768px) {
+    /* Texture Picker - VERTICAL on RIGHT side */
+    .texture-picker {
+        position: fixed;
+        top: 50%;
+        left: auto;
+        right: 15px;
+        transform: translateY(-50%);
+        flex-direction: column;
+        padding: 12px 12px;
+        gap: 12px;
+        border-radius: 40px;
+    }
+    
+    .texture-circle {
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* Color Picker - stays HORIZONTAL at bottom */
+    .color-picker {
+        bottom: 15px;
+        padding: 8px 16px;
+        gap: 10px;
+    }
+    
+    .color-circle {
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* Gizmo Panel - VERTICAL on LEFT side */
+    .gizmo-panel {
+        left: 15px;
+        padding: 12px 8px;
+        gap: 10px;
+    }
+    
+    .gizmo-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 10px;
+    }
+    
+    /* Controls Panel - Top Right */
+    .controls-panel {
+        top: 12px;
+        right: 12px;
+        padding: 12px 16px;
+        min-width: 160px;
+        gap: 12px;
+        max-height: 80vh;
+    }
+    
+    .control-group label {
+        font-size: 9px;
+    }
+    
+    select, button {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    /* Info text */
+    .info {
+        top: auto;
+        bottom: 10px;
+        left: 10px;
+        font-size: 9px;
+    }
+    
+    .loading-overlay {
+        bottom: 10px;
+        right: 10px;
+        font-size: 10px;
+    }
+}
+
+/* ========== SMALL PHONES (max-width: 480px) ========== */
+@media (max-width: 480px) {
+    .texture-circle {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .gizmo-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 9px;
+    }
+    
+    .color-circle {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .controls-panel {
+        max-height: 60vh;
+        min-width: 140px;
+        padding: 10px 12px;
+    }
+    
+    .texture-picker {
+        padding: 10px 10px;
+        gap: 10px;
+    }
+    
+    .gizmo-panel {
+        padding: 10px 6px;
+        gap: 8px;
+    }
+}
+        
+        .controls-panel::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .controls-panel::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        
+        .controls-panel::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+        }
