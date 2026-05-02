@@ -6,7 +6,7 @@
 
 ## 🌐 Live Demo
 
-[View Live Demo](https://your-username.github.io/your-repo-name/)
+[View Live Demo](https://material-demo.parisashahbazi.com/)
 
 
 ## 📖 About
