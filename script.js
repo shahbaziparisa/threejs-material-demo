@@ -5,11 +5,12 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 // ========== CONFIGURATION ==========
-const MODEL_PATH = './model/model.glb';
+const MODEL_PATH = './model/table.glb';
+const MODEL_PATH2 = './model/QuadSurface.glb';
 
 // Target mesh and material names
-const TARGET_MESH_NAME = 'Cylinder001_1';
-const TARGET_MATERIAL_NAME = 'oak_veneer_01';
+const TARGET_MESH_NAME = 'Plane004';
+const TARGET_MATERIAL_NAME = 'Dark wood.006';
 
 // ========== PBR MATERIALS CONFIGURATION ==========
 const PBR_MATERIALS = [
@@ -400,6 +401,48 @@ function loadGLBModel() {
             currentModel.position.set(0, 0, 0);
             
             console.log('=== Model Loaded ===');
+            console.log('Target mesh:', TARGET_MESH_NAME);
+            console.log('Target material:', TARGET_MATERIAL_NAME);
+            
+            // Enable shadows on all meshes
+            currentModel.traverse(child => {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+            
+            scene.add(currentModel);
+            
+            // Auto-adjust camera
+            const box = new THREE.Box3().setFromObject(currentModel);
+            const center = box.getCenter(new THREE.Vector3());
+            controls.target.copy(center);
+            controls.update();
+            
+            loadingDiv.innerHTML = '✅ Model loaded! Select a texture';
+            setTimeout(() => { loadingDiv.style.opacity = '0.5'; }, 2000);
+            
+            dracoLoader.dispose();
+        },
+        (xhr) => {
+            const percent = Math.floor(xhr.loaded / xhr.total * 100);
+            loadingDiv.innerHTML = `📦 Loading model: ${percent}%`;
+        },
+        (error) => {
+            console.error('Model load error:', error);
+            loadingDiv.innerHTML = '❌ Failed to load model! Check path.';
+            loadingDiv.style.color = '#ff6666';
+        }
+    );
+      loader.load(MODEL_PATH2, 
+        (gltf) => {
+            // if (currentModel) scene.remove(currentModel);
+            currentModel = gltf.scene;
+            currentModel.scale.set(1, 1, 1);
+            currentModel.position.set(0, 0, 0);
+            
+            console.log('=== Model Loaded 2 ===',currentModel);
             console.log('Target mesh:', TARGET_MESH_NAME);
             console.log('Target material:', TARGET_MATERIAL_NAME);
             

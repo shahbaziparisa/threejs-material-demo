@@ -2,7 +2,7 @@
 
 > A simple but complete 3D model viewer with real-time PBR material switching, HDRI environments, and lighting controls.
 
-![Demo Screenshot](./screen.png)
+![Demo Screenshot](./screen2.png)
 
 ## 🌐 Live Demo
 
